@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --clr-bg: #4D283A;
+  --clr-num: #745468;
+  --clr-operation: #EF8B2D;
+  --clr-other: #5A374A;
+}
+
+@layer base {
+  body {
+    min-height: 100svh;
+    @apply bg-bg text-white;
+  }
+
+  svg {
+    @apply fill-none w-8 h-8 stroke-current stroke-[1.5px];
+  }
+
+  button {
+    @apply active:scale-95 select-none;
+  }
+}
