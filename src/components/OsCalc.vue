@@ -35,6 +35,13 @@
           :history-calc="history.calculation"
           :history-result="history.result"
         ></calc-historys>
+        <!-- checkCoaches -->
+        <h3
+          class="font-semibold text-lg absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 border-none"
+          v-if="checkHistorys"
+        >
+          No Historys
+        </h3>
       </ul>
     </transition>
     <div class="p-8 pb-0">
@@ -95,7 +102,7 @@
 
 <script setup>
 /* eslint-disable */
-import { ref, onMounted } from "vue";
+import { ref, computed, onMounted } from "vue";
 import calcHistorys from "./calcHistorys";
 
 const inputCalc = ref(null);
@@ -104,8 +111,12 @@ const result = ref("0");
 const historys = ref([]);
 const operationErr = ref("");
 const isAct = ref(false);
-const historyAct = ref(true);
+const historyAct = ref(false);
 let errorTimeout = null;
+
+const checkHistorys = computed(
+  () => historys.value && historys.value.length <= 0
+);
 
 const openHistory = () => (historyAct.value = true);
 const closeHistory = () => (historyAct.value = false);
