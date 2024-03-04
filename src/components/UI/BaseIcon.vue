@@ -92,6 +92,15 @@
     <path d="M20 18h-6" />
     <path d="M5 19l14 -14" />
   </svg>
+  <!--  -->
+  <svg
+    v-if="name === 'close'"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    class="w-6"
+  >
+    <path stroke-linecap="round" d="M6 18 18 6M6 6l12 12" />
+  </svg>
 </template>
 
 <script setup>

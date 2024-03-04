@@ -15,14 +15,19 @@
     </transition>
     <transition name="history">
       <ul
-        class="absolute bg-bg w-[300px] h-full overflow-y-scroll px-4 divide-y-2"
+        class="absolute bg-bg w-[300px] h-full overflow-y-auto px-4 divide-y-2"
         v-if="historyAct"
       >
-        <div class="bg-bg p-4 sticky top-0 w-full flex justify-between">
-          <button class="bg-red-500" @click="CleareHistorys">
+        <div class="bg-bg py-4 sticky top-0 w-full flex justify-between">
+          <button
+            class="bg-operation px-2 rounded-sm text-sm"
+            @click="CleareHistorys"
+          >
             Cleare Historys
           </button>
-          <button @click="closeHistory">close</button>
+          <button @click="closeHistory">
+            <baseIcon name="close" />
+          </button>
         </div>
         <calc-historys
           v-for="history in historys"
@@ -99,7 +104,7 @@ const result = ref("0");
 const historys = ref([]);
 const operationErr = ref("");
 const isAct = ref(false);
-const historyAct = ref(false);
+const historyAct = ref(true);
 let errorTimeout = null;
 
 const openHistory = () => (historyAct.value = true);
@@ -121,20 +126,13 @@ const toggleParentheses = () => {
   const isOpening = lastChar !== "(" && lastChar !== ")";
   const parenthesis = isOpening ? "(" : ")";
 
-  // Find the position of the last open parenthesis
   const lastOpenParenIndex = input.value.lastIndexOf("(");
-
-  // Find the position of the last closed parenthesis
   const lastClosedParenIndex = input.value.lastIndexOf(")");
-
-  // Check if the last open parenthesis is more recent than the last closed one
   const isOpenParenRecent = lastOpenParenIndex > lastClosedParenIndex;
 
-  // Close the parentheses only if there's an open parenthesis and no closed parenthesis after it
   if (isOpening && isOpenParenRecent) {
     input.value += ")";
   } else {
-    // Otherwise, add an opening parenthesis
     input.value += parenthesis;
   }
 
@@ -220,10 +218,6 @@ const handleKeyDown = (e) => {
   )
     return;
 
-  // Shift is plus
-  // if (keyPressed === "Shift") {
-  // }
-
   e.preventDefault();
 };
 
@@ -243,7 +237,7 @@ const calculateResult = () => {
   } catch (error) {
     result.value = error.message || "Invalid Expression";
   } finally {
-    historys.value.push({
+    historys.value.unshift({
       calculation: input.value,
       result: result.value.toString(),
     });
@@ -295,6 +289,14 @@ section {
 
 .history-enter-active {
   animation: history 300ms ease-out;
+}
+
+ul::-webkit-scrollbar {
+  @apply bg-other w-[5px];
+}
+
+ul::-webkit-scrollbar-thumb {
+  @apply bg-num;
 }
 
 .history-leave-active {
