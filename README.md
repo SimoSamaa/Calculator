@@ -14,9 +14,8 @@ This is a simple calculator web application built using Vue.js 3 and Tailwind CS
 - Tailwind CSS
 
 ## Screenshots
-<div style='width: 100%; display: flex; justify-content: center;'>
-  <img src="https://i.ibb.co/dW9XS82/GIF-20240330-013750-317.gif" alt="App Screenshot" height="450px">
-</div>
+![Uploading GIF_20240330_013750_317.gif…]()
+
 
 ## Project setup
 ```
