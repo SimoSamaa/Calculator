@@ -1,5 +1,5 @@
 <template>
-  <section class="grid relative">
+  <section class="flex flex-col relative min-h-[100svh]">
     <div
       :class="{ act: isAct }"
       class="absolute -top-8 duration-300 transition-all ease-out opacity-0 left-1/2 -translate-x-1/2 bg-other p-4 shadow-md rounded"
@@ -44,7 +44,7 @@
         </h3>
       </ul>
     </transition>
-    <div class="p-8 pb-0">
+    <div class="p-8">
       <input
         ref="inputCalc"
         @keydown="handleKeyDown($event)"
@@ -63,37 +63,97 @@
         </button>
       </div>
     </div>
-    <div class="calc-btn grid gap-1 text-2xl">
-      <button class="btn text-red-600" @click="cleareInput">C</button>
-      <button class="btn" @click="toggleParentheses">( )</button>
-      <button class="btn" @click="calcPercentage('%')">%</button>
-      <button class="btn" @click="calcOperation('/')">
+    <div class="calc-btn grid gap-1 text-2xl flex-1">
+      <button
+        class="btn text-red-600"
+        @click="cleareInput"
+      >C</button>
+      <button
+        class="btn"
+        @click="toggleParentheses"
+      >( )</button>
+      <button
+        class="btn"
+        @click="calcPercentage('%')"
+      >%</button>
+      <button
+        class="btn"
+        @click="calcOperation('/')"
+      >
         <baseIcon name="divide" />
       </button>
-      <button class="btn" @click="getNumber('7')">7</button>
-      <button class="btn" @click="getNumber('8')">8</button>
-      <button class="btn" @click="getNumber('9')">9</button>
-      <button class="btn" @click="calcOperation('*')">X</button>
-      <button class="btn" @click="getNumber('4')">4</button>
-      <button class="btn" @click="getNumber('5')">5</button>
-      <button class="btn" @click="getNumber('6')">6</button>
-      <button class="btn" @click="calcOperation('-')">
+      <button
+        class="btn"
+        @click="getNumber('7')"
+      >7</button>
+      <button
+        class="btn"
+        @click="getNumber('8')"
+      >8</button>
+      <button
+        class="btn"
+        @click="getNumber('9')"
+      >9</button>
+      <button
+        class="btn"
+        @click="calcOperation('*')"
+      >X</button>
+      <button
+        class="btn"
+        @click="getNumber('4')"
+      >4</button>
+      <button
+        class="btn"
+        @click="getNumber('5')"
+      >5</button>
+      <button
+        class="btn"
+        @click="getNumber('6')"
+      >6</button>
+      <button
+        class="btn"
+        @click="calcOperation('-')"
+      >
         <baseIcon name="minus" />
       </button>
-      <button class="btn" @click="getNumber('1')">1</button>
-      <button class="btn" @click="getNumber('2')">2</button>
-      <button class="btn" @click="getNumber('3')">3</button>
-      <button class="btn" @click="calcOperation('+')">
+      <button
+        class="btn"
+        @click="getNumber('1')"
+      >1</button>
+      <button
+        class="btn"
+        @click="getNumber('2')"
+      >2</button>
+      <button
+        class="btn"
+        @click="getNumber('3')"
+      >3</button>
+      <button
+        class="btn"
+        @click="calcOperation('+')"
+      >
         <baseIcon name="plus" />
       </button>
-      <button class="btn" @click="setNegativeOrPositive">
+      <button
+        class="btn"
+        @click="setNegativeOrPositive"
+      >
         <baseIcon name="plus-minus" />
       </button>
-      <button class="btn" @click="getNumber('0')">0</button>
-      <button class="btn" @click="getDot('.')">
+      <button
+        class="btn"
+        @click="getNumber('0')"
+      >0</button>
+      <button
+        class="btn"
+        @click="getDot('.')"
+      >
         <baseIcon name="dot" />
       </button>
-      <button class="btn" @click="calculateResult">
+      <button
+        class="btn"
+        @click="calculateResult"
+      >
         <baseIcon name="equal" />
       </button>
     </div>
@@ -141,7 +201,7 @@ const toggleParentheses = () => {
   const lastClosedParenIndex = input.value.lastIndexOf(")");
   const isOpenParenRecent = lastOpenParenIndex > lastClosedParenIndex;
 
-  if (isOpening && isOpenParenRecent) {
+  if(isOpening && isOpenParenRecent) {
     input.value += ")";
   } else {
     input.value += parenthesis;
@@ -151,20 +211,10 @@ const toggleParentheses = () => {
 };
 
 const getDot = () => {
-  const operations = ["+", "-", "*", "/"];
-  if (input.value === "") input.value = "0.";
-  // if (allowedKey.some((key) => input.value.includes(key))) {
-  //   // input.value += "0.";
-  // }
+  const operations = [ "+", "-", "*", "/" ];
+  if(input.value === "") input.value = "0.";
 
-  // if (
-  //   allowedKey.some((key) => input.value.includes(key)) &&
-  //   input.value.slice(-1) === "1"
-  // ) {
-  //   input.value += ".";
-  // }
-
-  if (input.value.indexOf(".") === -1) {
+  if(input.value.indexOf(".") === -1) {
     input.value += ".";
   }
 
@@ -173,7 +223,7 @@ const getDot = () => {
 
 const setNegativeOrPositive = () => {
   input.value =
-    input.value[0] === "-" ? input.value.slice(1) : `-${input.value}`;
+    input.value[ 0 ] === "-" ? input.value.slice(1) : `-${ input.value }`;
   inputCalc.value.focus();
 };
 
@@ -193,20 +243,20 @@ const calcOperation = (operation) => {
   let filterOperation;
   inputCalc.value.focus();
 
-  if (input.value === "") {
+  if(input.value === "") {
     displayOperationError();
     return;
   }
 
-  if (
+  if(
     input.value.slice(-1) !== "+" &&
     input.value.slice(-1) !== "-" &&
     input.value.slice(-1) !== "x" &&
     input.value.slice(-1) !== "/"
   ) {
-    if (operation === "*") {
+    if(operation === "*") {
       filterOperation = "x";
-    } else if (operation === "/") {
+    } else if(operation === "/") {
       filterOperation = "÷";
     } else {
       filterOperation = operation;
@@ -220,9 +270,9 @@ const handleKeyDown = (e) => {
   let keyPressed = e.key;
   const allowedKey = "+-*/.()%";
 
-  if (keyPressed.includes("Enter")) calculateResult();
+  if(keyPressed.includes("Enter")) calculateResult();
 
-  if (
+  if(
     !isNaN(keyPressed) ||
     allowedKey.includes(keyPressed) ||
     keyPressed === "Backspace"
@@ -238,14 +288,14 @@ const calcPercentage = () => {
 
 const calculateResult = () => {
   inputCalc.value.focus();
-  if (!input.value) return;
+  if(!input.value) return;
 
   try {
     const expression = input.value.replace(/x/g, "*").replace(/÷/g, "/");
-    result.value = Function(`"use strict";return (${expression})`)();
+    result.value = Function(`"use strict";return (${ expression })`)();
 
-    if (expression.includes("/0")) throw new Error("can't divide by zero");
-  } catch (error) {
+    if(expression.includes("/0")) throw new Error("can't divide by zero");
+  } catch(error) {
     result.value = error.message || "Invalid Expression";
   } finally {
     historys.value.unshift({
@@ -258,8 +308,8 @@ const calculateResult = () => {
 };
 
 const loadHistorys = async () => {
-  if (localStorage.getItem("historys")) {
-    historys.value = await JSON.parse(localStorage["historys"]);
+  if(localStorage.getItem("historys")) {
+    historys.value = await JSON.parse(localStorage[ "historys" ]);
   }
 };
 
@@ -274,10 +324,6 @@ onMounted(() => {
 </script>
 
 <style scoped>
-section {
-  min-height: 100svh;
-  grid-template-rows: 3fr 7.2fr;
-}
 .calc-btn {
   grid-template-columns: repeat(4, 1fr);
 }
@@ -319,6 +365,7 @@ ul::-webkit-scrollbar-thumb {
     transform: translate(-300px);
     opacity: 0.5;
   }
+
   to {
     transform: translate(0);
     opacity: 1;
@@ -337,6 +384,7 @@ ul::-webkit-scrollbar-thumb {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
