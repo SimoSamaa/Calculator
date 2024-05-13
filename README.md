@@ -14,7 +14,14 @@ This is a simple calculator web application built using Vue.js 3 and Tailwind CS
 - Tailwind CSS
 
 ## Screenshots
-![GIF_20240330_013750_317](https://github.com/SimoSamaa/Calculator/assets/82063544/88ef870b-0e2c-4720-9ef7-86b4fd08e3a2)
+<div style='
+    width: 100%;
+    background: red;
+    display: flex;
+    justify-content: center;
+  '>
+  ![GIF_20240330_013750_317](https://github.com/SimoSamaa/Calculator/assets/82063544/88ef870b-0e2c-4720-9ef7-86b4fd08e3a2)
+</div>
 
 
 ## Project setup
